@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts with CapitalOne</title>
+</head>
+<body>
+Yay
+{% if posts %}
+    {% for post in posts %}
+        <img src="{{ post.images.low_resolution.url }}" alt="">
+    {% endfor %}
+{%  endif %}
+</body>
+</html>
