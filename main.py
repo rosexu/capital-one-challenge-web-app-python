@@ -41,5 +41,12 @@ def searchPosts():
     return render_template("posts.html", posts=posts)
 
 
+@app.route('/user/<userid>')
+def getUserInfo(userid=None):
+    print userid
+    user_info = requests.get("https://api.instagram.com/v1/users/" + userid + "/", params={"access_token": accessToken})
+    user = user_info.json()['data']
+    return render_template("user.html", user=user)
+
 if __name__ == '__main__':
     app.run()

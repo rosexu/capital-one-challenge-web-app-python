@@ -5,10 +5,15 @@
     <title>Posts with CapitalOne</title>
 </head>
 <body>
-Yay
 {% if posts %}
     {% for post in posts %}
         <img src="{{ post.images.low_resolution.url }}" alt="">
+        <div>
+            <p>Caption: {{ post.caption.text }}</p>
+            <p>Likes: {{ post.likes.count }}</p>
+            <p>Posted By: {{ post.user.username }}</p>
+            <a href="/user/{{ post.user.id }}"><button>More Info About {{ post.user.username }}</button></a>
+        </div>
     {% endfor %}
 {%  endif %}
 </body>
