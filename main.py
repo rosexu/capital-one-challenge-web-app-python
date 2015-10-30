@@ -10,7 +10,7 @@ app = Flask(__name__)
 clientID = "c154c63ac943405e848bf8a936eeb12a"
 clientSecret = "dd9e465214994ed788ecb9781f3c460f"
 grantType = "authorization_code"
-redirectURI = "http://localhost:5000/get-20"
+redirectURI = "https://shrouded-sands-7834.herokuapp.com/get-20"
 auth = "https://api.instagram.com/oauth/authorize/?" + "client_id=" + clientID + "&" + "redirect_uri=" + redirectURI + "&response_type=code"
 accessToken = ""
 
