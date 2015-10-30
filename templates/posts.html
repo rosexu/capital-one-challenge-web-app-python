@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts with CapitalOne</title>
+
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div id="sentiment-button-container">
+    <a href="/sentiment"><button class="btn btn-success" id = "sentiment-button">Sentiment Analysis Summary</button></a>
+    <p>Note: the sentiment analysis takes a while to conduct. The page will load a couple seconds after you click on the button. </p>
+</div>
+
 {% if posts %}
     {% for post in posts %}
-        <img src="{{ post.images.low_resolution.url }}" alt="">
-        <div>
-            <p>Caption: {{ post.caption.text }}</p>
-            <p>Likes: {{ post.likes.count }}</p>
-            <p>Posted By: {{ post.user.username }}</p>
-            <a href="/user/{{ post.user.id }}"><button>More Info About {{ post.user.username }}</button></a>
-        </div>
+        <li class = "posts">
+            <img src="{{ post.images.low_resolution.url }}" alt="">
+            <div>
+                <p><span class="bold">Caption: </span>{{ post.caption.text }}</p>
+                <p><span class="bold">Likes: </span>{{ post.likes.count }}</p>
+                <p><span class="bold">Posted By: </span>{{ post.user.username }}</p>
+                <a href="/user/{{ post.user.id }}">
+                    <button class="btn btn-primary">More Info About {{ post.user.username }}</button>
+                </a>
+            </div>
+        </li>
     {% endfor %}
 {%  endif %}
 </body>

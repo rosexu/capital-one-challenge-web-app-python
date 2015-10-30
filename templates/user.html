@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>User Info: {{ user.username }}</title>
+
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <p>Username: {{ user.username }}</p>
-        <p>Full Name: {{ user.full_name }}</p>
-        <p>Number of posts: {{ user.counts.media }}</p>
-        <p>Number of follows: {{ user.counts.follows }}</p>
-        <p>Number of followers: {{ user.counts.followed_by }}</p>
+    <div class="user-information">
+        <p><span class="bold">Username: </span>{{ user.username }}</p>
+        {% if user.full_name %}
+        <p>
+            <span class="bold">Full Name: </span>{{ user.full_name }}
+        </p>
+        {% endif %}
+        <p><span class="bold">Number of posts: </span>{{ user.counts.media }}</p>
+        <p><span class="bold">Number of follows: </span>{{ user.counts.follows }}</p>
+        <p><span class="bold">Number of followers: </span>{{ user.counts.followed_by }}</p>
     </div>
 </body>
 </html>

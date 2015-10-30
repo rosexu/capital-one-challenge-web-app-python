@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<title>Capital One on Instagram</title>
+    <title>Sentiment Analysis</title>
 
     <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
 
     <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
-<body class="main">
-    <div id="main-container">
-        <h1 id = "header-title">Capital One on Instagram</h1>
-        <a href="../posts">
-            <button class = "btn btn-success" id="button-cta">Find Recent Posts</button>
-        </a>
+<body>
+    <div id="sentiment">
+        <p><span class="bold">Number of Positive Posts: </span>{{ sentiment.positive }}</p>
+        <p><span class="bold">Number of Neutral Posts: </span>{{ sentiment.neutral }}</p>
+        <p><span class="bold">Number of Negative Posts: </span>{{ sentiment.negative }}</p>
     </div>
 </body>
 </html>

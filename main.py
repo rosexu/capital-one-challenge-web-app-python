@@ -1,5 +1,6 @@
 import os
 import requests
+import indicoio
 from flask import Flask
 from flask import render_template, redirect, request
 
@@ -34,11 +35,52 @@ def getPosts():
 
 
 @app.route('/posts')
-def searchPosts():
+def search_posts():
+    posts = get_posts()
+    return render_template("posts.html", posts=posts)
+
+
+def get_posts():
     print accessToken
     result = requests.get("https://api.instagram.com/v1/tags/capitalone/media/recent?count=20&access_token=" + accessToken)
-    posts = result.json()['data']
-    return render_template("posts.html", posts=posts)
+    return result.json()['data']
+
+
+@app.route('/sentiment')
+def sentiment():
+    posts = get_posts()
+    list_caps = []
+    for post in posts:
+        print(post['caption']['text'])
+        list_caps.append(post['caption']['text'])
+    sentiment_counts = sentiment_analysis(list_caps)
+    return render_template("sentiment.html", sentiment=sentiment_counts)
+
+
+
+def sentiment_analysis(list_captions):
+    indicoio.config.api_key = '64ea7c556b0060d9d7a8e97c8d8968d7'
+    list_sentiment = []
+    num_pos = 0
+    num_neu = 0
+    num_neg = 0
+    for caption in list_captions:
+        sentiment = indicoio.sentiment_hq(caption)
+        list_sentiment.append(sentiment)
+        if sentiment > 0.55:
+            print("positive")
+            num_pos += 1
+        elif sentiment > 0.45:
+            print("neutral")
+            num_neu += 1
+        else:
+            print("negative")
+            num_neg += 1
+
+    sentiment_dict = {"positive": num_pos,
+                      "neutral": num_neu,
+                      "negative": num_neg}
+    return sentiment_dict
 
 
 @app.route('/user/<userid>')
